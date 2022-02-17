@@ -31,8 +31,6 @@ public class MainFrame extends JFrame {
         JButton bt1, bt2, bt3, bt4, bt5, bt6, bt7, bt8, bt9, btDel, btEqual, btMulti, btDiv, btSum, btSub, btDot;
         Font font = new Font("Courier", Font.PLAIN, 25);
 
-        //TODO: adicionar fonte maior aos botões
-
         btDel = new JButton();
             btDel.setText("DEL");
             btDel.setFont(font);
