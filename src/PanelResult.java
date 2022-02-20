@@ -13,7 +13,7 @@ public class PanelResult extends JPanel {
 
     private JLabel lbResult(){
 
-        JLabel lbResult = new JLabel("resultado");
+        JLabel lbResult = new JLabel();
         Font font = new Font("Courier", Font.BOLD, 45);
 
         lbResult.setBounds(0,0, 400, 100);
