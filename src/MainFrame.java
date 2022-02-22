@@ -139,72 +139,80 @@ public class MainFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        //TODO: adicionar botões de operações e =
+        //TODO: implementação do botão btEqual
 
-        //Botão 7
+            //Botão 7
         if (e.getSource() == panelButtons.getComponent(1)) {
 
             lbResult.setText(lbResult.getText() + "7");
 
-        //Botão 8
+            //Botão 8
         } else if (e.getSource() == panelButtons.getComponent(2)) {
 
             lbResult.setText(lbResult.getText() + "8");
 
 
-        //Botão 9
+            //Botão 9
         } else if (e.getSource() == panelButtons.getComponent(3)) {
 
             lbResult.setText(lbResult.getText() + "9");
 
-        //Botão 4
+            //Botão 4
         } else if (e.getSource() == panelButtons.getComponent(5)) {
 
             lbResult.setText(lbResult.getText() + "4");
 
-        //Botão 5
+            //Botão 5
         } else if (e.getSource() == panelButtons.getComponent(6)) {
 
             lbResult.setText(lbResult.getText() + "5");
 
-        //Botão 6
+            //Botão 6
         } else if (e.getSource() == panelButtons.getComponent(7)) {
 
             lbResult.setText(lbResult.getText() + "6");
 
-        //Botão 1
+            //Botão 1
         } else if (e.getSource() == panelButtons.getComponent(9)) {
 
             lbResult.setText(lbResult.getText() + "1");
 
-        //Botão 2
+            //Botão 2
         } else if (e.getSource() == panelButtons.getComponent(10)) {
 
             lbResult.setText(lbResult.getText() + "2");
 
-        //Botão 3
+            //Botão 3
         } else if (e.getSource() == panelButtons.getComponent(11)) {
 
             lbResult.setText(lbResult.getText() + "3");
 
+            //Botão ,
         } else if (e.getSource() == panelButtons.getComponent(14)) {
 
             if (clicado == 0) {
 
-                lbResult.setText(lbResult.getText() + ",");
+                if(lbResult.getText().length() == 0){
 
+                    lbResult.setText(lbResult.getText() + "0,");
+
+                }else {
+
+                    lbResult.setText(lbResult.getText() + ",");
+
+                }
                 clicado++;
             }
 
-        //Botão Del
+            //Botão Del
         } else if (e.getSource() == panelButtons.getComponent(0)) {
 
             if (lbResult.getText().length() > 0) {
 
                 String numero = lbResult.getText();
-                int apagar = numero.length()-1;
+                int apagar = numero.length() - 1;
 
-                if(numero.charAt(apagar) == ','){
+                if (numero.charAt(apagar) == ',') {
                     clicado = 0;
                 }
 
@@ -213,28 +221,96 @@ public class MainFrame extends JFrame implements ActionListener {
                 lbResult.setText(numero);
             }
 
-        //Botão *
-        }else if(e.getSource() == panelButtons.getComponent(4)){
+            //Botão *
+        } else if (e.getSource() == panelButtons.getComponent(4)) {
 
+            if (lbResult.getText().length() > 0) {
 
+                char ultimoCaractere = lbResult.getText().charAt(lbResult.getText().length() - 1);
 
-        //Botão /
-        }else if(e.getSource() == panelButtons.getComponent(8)){
+                if (ultimoCaractere != '+' && ultimoCaractere != '-' && ultimoCaractere != '*' && ultimoCaractere != '/') {
 
+                    if (ultimoCaractere == ',') {
 
+                        lbResult.setText(lbResult.getText() + "0*");
 
-        //Botão +
-        }else if(e.getSource() == panelButtons.getComponent(12)){
+                    } else {
+                        lbResult.setText(lbResult.getText() + "*");
+                    }
 
+                    clicado = 0;
 
+                }
+            }
 
-        //Botão -
-        }else if(e.getSource() == panelButtons.getComponent(13)){
+            //Botão /
+        } else if (e.getSource() == panelButtons.getComponent(8)) {
 
+            if (lbResult.getText().length() > 0) {
 
+                char ultimoCaractere = lbResult.getText().charAt(lbResult.getText().length() - 1);
 
-        //Botão =
-        }else if(e.getSource() == panelButtons.getComponent(15)){
+                if (ultimoCaractere != '+' && ultimoCaractere != '-' && ultimoCaractere != '*' && ultimoCaractere != '/') {
+
+                    if (ultimoCaractere == ',') {
+
+                        lbResult.setText(lbResult.getText() + "0/");
+
+                    } else {
+                        lbResult.setText(lbResult.getText() + "/");
+                    }
+
+                    clicado = 0;
+
+                }
+            }
+
+            //Botão +
+        } else if (e.getSource() == panelButtons.getComponent(12)) {
+
+            if (lbResult.getText().length() > 0) {
+
+                char ultimoCaractere = lbResult.getText().charAt(lbResult.getText().length() - 1);
+
+                if (ultimoCaractere != '+' && ultimoCaractere != '-' && ultimoCaractere != '*' && ultimoCaractere != '/') {
+
+                    if (ultimoCaractere == ',') {
+
+                        lbResult.setText(lbResult.getText() + "0+");
+
+                    } else {
+                        lbResult.setText(lbResult.getText() + "+");
+                    }
+
+                    clicado = 0;
+
+                }
+            }
+
+            //Botão -
+        } else if (e.getSource() == panelButtons.getComponent(13)) {
+
+            if (lbResult.getText().length() > 0) {
+
+                char ultimoCaractere = lbResult.getText().charAt(lbResult.getText().length() - 1);
+
+                if (ultimoCaractere != '+' && ultimoCaractere != '-' && ultimoCaractere != '*' && ultimoCaractere != '/') {
+
+                    if (ultimoCaractere == ',') {
+
+                        lbResult.setText(lbResult.getText() + "0-");
+
+                    } else {
+                        lbResult.setText(lbResult.getText() + "-");
+                    }
+
+                    clicado = 0;
+
+                }
+            }
+
+            //Botão =
+        } else if (e.getSource() == panelButtons.getComponent(15)) {
 
 
 
