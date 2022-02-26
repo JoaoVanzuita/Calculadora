@@ -192,13 +192,30 @@ public class MainFrame extends JFrame implements ActionListener {
 
             if (clicado == 0) {
 
-                if(lbResult.getText().length() == 0){
+
+                if(lbResult.getText().length() > 0) {
+
+                    char ultimoCaractere = lbResult.getText().charAt(lbResult.getText().length() - 1);
+
+                    if(ultimoCaractere == '*' ||
+                            ultimoCaractere == '/' ||
+                            ultimoCaractere == '+' ||
+                            ultimoCaractere == '-'){
+
+                        lbResult.setText(lbResult.getText() + "0,");
+
+
+                    }
+                }
+
+                if(lbResult.getText().length() == 0 ){
+
 
                     lbResult.setText(lbResult.getText() + "0,");
 
-                }else {
+                }else{
 
-                    lbResult.setText(lbResult.getText() + ",");
+                    lbResult.setText(lbResult.getText()+ ",");
 
                 }
                 clicado++;
