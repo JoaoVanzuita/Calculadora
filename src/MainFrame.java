@@ -118,7 +118,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
         panel.add(btSub);
 
-        btDot = new JButton(",");
+        btDot = new JButton(".");
         btDot.setFont(font);
         btDot.addActionListener(this);
 
@@ -133,21 +133,25 @@ public class MainFrame extends JFrame implements ActionListener {
         return panel;
     }
 
-    //Contador para botão ,
+    //Contador para botão .
     int clicado = 0;
+
+    Boolean operacaoAnterior = false;
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        //TODO: implementação do botão btEqual
-
             //Botão 7
         if (e.getSource() == panelButtons.getComponent(1)) {
+
+            verificaOperacaoAnterior();
 
             lbResult.setText(lbResult.getText() + "7");
 
             //Botão 8
         } else if (e.getSource() == panelButtons.getComponent(2)) {
+
+            verificaOperacaoAnterior();
 
             lbResult.setText(lbResult.getText() + "8");
 
@@ -155,40 +159,56 @@ public class MainFrame extends JFrame implements ActionListener {
             //Botão 9
         } else if (e.getSource() == panelButtons.getComponent(3)) {
 
+            verificaOperacaoAnterior();
+
             lbResult.setText(lbResult.getText() + "9");
 
             //Botão 4
         } else if (e.getSource() == panelButtons.getComponent(5)) {
+
+            verificaOperacaoAnterior();
 
             lbResult.setText(lbResult.getText() + "4");
 
             //Botão 5
         } else if (e.getSource() == panelButtons.getComponent(6)) {
 
+            verificaOperacaoAnterior();
+
             lbResult.setText(lbResult.getText() + "5");
 
             //Botão 6
         } else if (e.getSource() == panelButtons.getComponent(7)) {
+
+            verificaOperacaoAnterior();
 
             lbResult.setText(lbResult.getText() + "6");
 
             //Botão 1
         } else if (e.getSource() == panelButtons.getComponent(9)) {
 
+            verificaOperacaoAnterior();
+
             lbResult.setText(lbResult.getText() + "1");
 
             //Botão 2
         } else if (e.getSource() == panelButtons.getComponent(10)) {
+
+            verificaOperacaoAnterior();
 
             lbResult.setText(lbResult.getText() + "2");
 
             //Botão 3
         } else if (e.getSource() == panelButtons.getComponent(11)) {
 
+            verificaOperacaoAnterior();
+
             lbResult.setText(lbResult.getText() + "3");
 
-            //Botão ,
+            //Botão .
         } else if (e.getSource() == panelButtons.getComponent(14)) {
+
+            verificaOperacaoAnterior();
 
             if (clicado == 0) {
 
@@ -202,7 +222,7 @@ public class MainFrame extends JFrame implements ActionListener {
                             ultimoCaractere == '+' ||
                             ultimoCaractere == '-'){
 
-                        lbResult.setText(lbResult.getText() + "0,");
+                        lbResult.setText(lbResult.getText() + "0.");
 
 
                     }
@@ -211,11 +231,11 @@ public class MainFrame extends JFrame implements ActionListener {
                 if(lbResult.getText().length() == 0 ){
 
 
-                    lbResult.setText(lbResult.getText() + "0,");
+                    lbResult.setText(lbResult.getText() + "0.");
 
                 }else{
 
-                    lbResult.setText(lbResult.getText()+ ",");
+                    lbResult.setText(lbResult.getText()+ ".");
 
                 }
                 clicado++;
@@ -229,7 +249,7 @@ public class MainFrame extends JFrame implements ActionListener {
                 String numero = lbResult.getText();
                 int apagar = numero.length() - 1;
 
-                if (numero.charAt(apagar) == ',') {
+                if (numero.charAt(apagar) == '.') {
                     clicado = 0;
                 }
 
@@ -247,7 +267,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
                 if (ultimoCaractere != '+' && ultimoCaractere != '-' && ultimoCaractere != '*' && ultimoCaractere != '/') {
 
-                    if (ultimoCaractere == ',') {
+                    if (ultimoCaractere == '.') {
 
                         lbResult.setText(lbResult.getText() + "0*");
 
@@ -269,7 +289,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
                 if (ultimoCaractere != '+' && ultimoCaractere != '-' && ultimoCaractere != '*' && ultimoCaractere != '/') {
 
-                    if (ultimoCaractere == ',') {
+                    if (ultimoCaractere == '.') {
 
                         lbResult.setText(lbResult.getText() + "0/");
 
@@ -291,7 +311,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
                 if (ultimoCaractere != '+' && ultimoCaractere != '-' && ultimoCaractere != '*' && ultimoCaractere != '/') {
 
-                    if (ultimoCaractere == ',') {
+                    if (ultimoCaractere == '.') {
 
                         lbResult.setText(lbResult.getText() + "0+");
 
@@ -313,7 +333,7 @@ public class MainFrame extends JFrame implements ActionListener {
 
                 if (ultimoCaractere != '+' && ultimoCaractere != '-' && ultimoCaractere != '*' && ultimoCaractere != '/') {
 
-                    if (ultimoCaractere == ',') {
+                    if (ultimoCaractere == '.') {
 
                         lbResult.setText(lbResult.getText() + "0-");
 
@@ -329,8 +349,97 @@ public class MainFrame extends JFrame implements ActionListener {
             //Botão =
         } else if (e.getSource() == panelButtons.getComponent(15)) {
 
+            operacaoAnterior = true;
+            clicado = 0;
 
+            String expressao = lbResult.getText();
+            lbResult.setText(calcular(expressao));
 
         }
+    }
+
+    public static String calcular(String expressao) {
+        Boolean resultadoObtido = false;
+        Double resultadoParcial;
+
+
+        while (resultadoObtido == false) {
+
+            String[] numeros = expressao.split("[^0-9.]");
+
+
+            String numero1 = numeros[0];
+
+            if (numeros.length < 2) {
+
+                return expressao;
+
+            }
+
+            String numero2 = numeros[1];
+
+            int indexRestante = numero1.length() + numero2.length() + 1;
+
+            String restante = expressao.substring(indexRestante);
+
+            char operacao = expressao.charAt(numero1.length());
+
+            switch (operacao) {
+
+                case '+':
+
+                    resultadoParcial = Double.parseDouble(numero1) + Double.parseDouble(numero2);
+
+                    expressao = resultadoParcial + restante;
+
+                    break;
+
+                case '-':
+
+                    resultadoParcial = Double.parseDouble(numero1) - Double.parseDouble(numero2);
+
+                    expressao = resultadoParcial + restante;
+
+                    break;
+
+                case '*':
+
+
+                    resultadoParcial = Double.parseDouble(numero1) * Double.parseDouble(numero2);
+
+                    expressao = resultadoParcial + restante;
+
+                    break;
+
+                case '/':
+
+                    resultadoParcial = Double.parseDouble(numero1) / Double.parseDouble(numero2);
+
+                    expressao = resultadoParcial + restante;
+
+                    break;
+
+                default:
+
+                    resultadoObtido = true;
+
+                    break;
+
+            }
+
+        }
+
+
+        return expressao;
+    }
+
+    public void verificaOperacaoAnterior(){
+
+        if(operacaoAnterior == true){
+
+            lbResult.setText("");
+            operacaoAnterior = false;
+        }
+
     }
 }
